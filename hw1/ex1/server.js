@@ -1,5 +1,5 @@
 const http = require('http');
-const infrastructure = require('./infrastructure');
+const infrastructure = require('../shared/infrastructure');
 
 const startServer = function() {
     const port = 8001;  

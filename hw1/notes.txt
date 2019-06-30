@@ -1,0 +1,5 @@
+Workplan
+
+    - create constants module
+    - Ex1
+        - implement the request ending functionality
