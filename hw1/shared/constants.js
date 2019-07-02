@@ -1,8 +1,6 @@
-
-const requestDelayMS = 1000;
-const port = 8001;
-
 module.exports = {
-    requestDelayMS: requestDelayMS,
-    port: port
+    requestDelayMS: 1000,
+    port: 8001,
+    requestsNumber: 10,
+    workersNumber: 4
 }

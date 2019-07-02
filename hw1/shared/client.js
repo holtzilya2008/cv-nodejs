@@ -2,6 +2,7 @@
 const http = require('http');
 
 const sendRequest = function() {
+    console.log('Client - sending request');
     http.get('http://localhost:8001/hello', resp => {
         let data = '';
 

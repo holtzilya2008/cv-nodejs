@@ -1,17 +1,16 @@
 const http = require('http');
 const infrastructure = require('../shared/infrastructure');
+const constants = require('../shared/constants');
 
 const startServer = function() {
-    const port = 8001;  
-    const delayMS = 1000;
-    console.log('Starting http server on port ' + port);
+    console.log('Starting http server on port ' + constants.port);
 
     http.Server((request, response) => {
         console.log(`Received request `);
+        infrastructure.sleep(constants.requestDelayMS);
         response.writeHead(200);
-        infrastructure.sleep(delayMS);
         response.end('Great success!');
-    }).listen(port);
+    }).listen(constants.port);
 }
 
 module.exports = {

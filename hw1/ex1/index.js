@@ -1,5 +1,6 @@
 const server = require('./server'); 
-const client = require('./client');
+const client = require('../shared/client');
+const constants = require('../shared/constants');
 
 server.init();
-client.sendMultipleRequests(10);
+client.sendMultipleRequests(constants.requestsNumber);
