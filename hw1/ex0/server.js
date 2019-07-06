@@ -13,4 +13,6 @@ const startServer = function() {
     }).listen(constants.port);
 };
 
-startServer();
+module.exports = {
+    init: startServer
+};

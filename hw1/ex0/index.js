@@ -1,5 +1,5 @@
 const server = require('./server'); 
-const client = require('../shared/client');
+const client = require('./client');
 const constants = require('../shared/constants');
 
 server.init();
