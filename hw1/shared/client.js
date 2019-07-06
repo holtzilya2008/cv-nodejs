@@ -3,16 +3,14 @@ const http = require('http');
 
 const sendRequest = function() {
     console.log('Client - sending request');
-    http.get('http://localhost:8001/hello', resp => {
+    http.get('http://localhost:8001/hello', response => {
         let data = '';
 
-        // A chunk of data has been recieved.
-        resp.on('data', (chunk) => {
+        response.on('data', (chunk) => {
             data += chunk;
         });
 
-        // The whole response has been received. Print out the result.
-        resp.on('end', () => {
+        response.on('end', () => {
             console.log('Response completed: ' + data);
         });
     });

@@ -6,33 +6,10 @@ const child_process = require('child_process');
 
 const startServer = function() {
     if (cluster.isMaster) {
-        // Keep track of http requests
-        let numReqs = 0;
-        setInterval(() => {
-            console.log(`numReqs = ${numReqs}`);
-        }, 1000);
-    
-        // Count requests
-        function messageHandler(msg) {
-            if (msg.cmd && msg.cmd === 'notifyRequest') {
-                numReqs += 1;
-            }
-        }
-        // Start workers and listen for messages containing notifyRequest
-
-        for (let i = 0; i < constants.workersNumber; i++) {
-            cluster.fork({workerId: i});
-        }
-        for (const id in cluster.workers) {
-            cluster.workers[id].on('message', messageHandler);
-        }
-
-        console.log('[MASTER] Created ' + constants.workersNumber + ' workers.');
+        infrastructure.startMasterRoutine(cluster);
     } else {
-        // Worker processes have a http server.
         http.Server((req, res) => {
             console.log('[WORKER ' + process.env.workerId + '] request: ' + req.url);
-            // Notify master about the request
             process.send({ cmd: 'notifyRequest' });
             
             const forked = child_process.fork(__dirname + '/'+ 'calcsum.js');
