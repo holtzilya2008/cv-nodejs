@@ -1,5 +1,5 @@
 module.exports = {
-    requestDelayMS: 1000,
+    requestDelayMS: 2000,
     loggingPeriodMS: 1000,
     port: 8001,
     requestsNumber: 10,
