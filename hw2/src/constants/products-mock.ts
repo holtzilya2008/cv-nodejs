@@ -1,6 +1,6 @@
-import { Product } from '../models';
+import { ProductDTO } from '../models';
 
-export const PRODUCTS_MOCK: Product[] = [{
+export const PRODUCTS_MOCK: ProductDTO[] = [{
     id: '74550ea7-5c29-4318-9b29-8cb0c035df1d',
     categoryId: '2960ad6e-fb54-4784-b9c9-0231cc7b1702',
     name: 'Wine - Wyndham Estate Bin 777',
