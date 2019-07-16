@@ -1,4 +1,4 @@
-import { ProductDTO, CategoryDTO } from '../models';
+import { CategoryDTO } from '../models';
 
 export const CATEGORIES_MOCK: CategoryDTO[] = [{
     id: '2960ad6e-fb54-4784-b9c9-0231cc7b1702',

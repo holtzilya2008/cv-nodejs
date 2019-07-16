@@ -1,59 +1,20 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { CategoryDTO, UpdateCategoryDTO } from '../models';
 import { CATEGORIES_MOCK } from '../constants/categories-mock';
-import uuid = require('uuid');
+import { BaseController } from '../infrastructure/base-controller';
 
 const router = express.Router();
 
 const staticItems: CategoryDTO[] = CATEGORIES_MOCK;
 
-function findItemIndexOrRespondNotFound(req: Request, res: Response, next: NextFunction) {
-    const id: string = req.params.id;
-    if (!id) {
-        res.sendStatus(404);
-        return;
-    }
-    const matchingIndex = staticItems.findIndex(p => p.id === id);
-    if (matchingIndex < 0) {
-      res.sendStatus(404);
-      return;
-    }
-    res.locals.matchingIndex = matchingIndex;
-    next();
-  }
-
 router.get('/', (req, res) => res.send(staticItems));
 
-router.get('/:id',
-    findItemIndexOrRespondNotFound,
-    (req, res) => {
-        const index = res.locals.matchingIndex;
-        res.send(staticItems[index]);
-    });
+router.get('/:id', (req, res) => BaseController.baseGetItemById(staticItems, req, res));
 
-router.post('/', (req, res) => {
-    const newItem: CategoryDTO = req.body;
-    newItem.id = uuid.v1();
-    staticItems.push(newItem);
-    res.status(201).send(newItem);
-});
+router.post('/', (req, res) => BaseController.basePost(staticItems, req, res));
 
-router.put('/:id',
-    findItemIndexOrRespondNotFound,
-    (req, res) => {
-        const index = res.locals.matchingIndex;
-        const updated: UpdateCategoryDTO = req.body;
-        let matchingItem: CategoryDTO = staticItems[index];
-        matchingItem = { id: matchingItem.id, ...updated };
-        staticItems[index] = matchingItem;
-        res.status(200).send(matchingItem);
-    });
+router.put('/:id', (req, res) => BaseController.basePut(staticItems, req, res));
 
-router.delete('/:id',
-    findItemIndexOrRespondNotFound,
-    (req, res) => {
-          staticItems.splice(res.locals.matchingIndex, 1);
-          res.sendStatus(204);
-    });
+router.delete('/:id', (req, res) => BaseController.baseDelete(staticItems, req, res));
 
 export { router };
