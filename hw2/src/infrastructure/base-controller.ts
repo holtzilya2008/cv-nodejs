@@ -55,7 +55,7 @@ function basePut<TEntity extends BaseEntityWithId, TUpdate>(
 function baseDelete<T extends BaseEntityWithId>(
             items: T[],
             req: Request,
-            res: Response,) {
+            res: Response) {
     const index = findItemIndexOrRespondNotFound<T>(items, req, res);
     items.splice(index, 1);
     res.sendStatus(204);
