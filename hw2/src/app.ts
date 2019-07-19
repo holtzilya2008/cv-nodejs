@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get('/test', (req, res) => res.send('hello express'));
+app.get('/test', (req, res) => res.send('Great Success!'));
 
-app.use('/api/products', productsRouter);
-app.use('/api/categories', categoriesRouter);
+app.use('/products', productsRouter);
+app.use('/categories', categoriesRouter);
 
 export {
   app,
