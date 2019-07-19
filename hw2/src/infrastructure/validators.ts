@@ -20,11 +20,14 @@ function validateName(req: Request,
                       next: NextFunction) {
     if (!req.body || !req.body.name) {
         res.sendStatus(StatusCodes.BadRequest);
-    } else if (req.body.name.length < 3) {
+    } else if (req.body.name.length < ValidationConstants.NameMinLength) {
         res.sendStatus(StatusCodes.Conflict);
     } else {
         next();
     }
 }
 
-
+export const Validators = {
+    validateId,
+    validateName,
+};
